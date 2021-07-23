@@ -4,6 +4,7 @@ main{
 }
 .diapo{
     position: relative;
+    overflow: hidden;
 }
 .elements{
     

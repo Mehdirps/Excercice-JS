@@ -110,5 +110,30 @@ window.onload = () => {
 
     elements = document.querySelector(".elements");
 
+    slides = Array.from(elements.children)
+    
+    // on récupère la largeur d'une slide
+    slideWidth = diapo.getBoundingClientRect().width;
+    // on récupère les flèches
+    let next = document.querySelector("#nav-droite");
+    let next2 = document.querySelector("#nav-gauche")
+
+    // on gère le click
+    next.addEventListener("click", slideNext)
+    next2.addEventListener("click",slideNext2)
 }
-// 17min22
+
+/**
+ * Faire défiler le diapo vers la droite
+ */
+function slideNext(){
+    // on incrémente le compteur
+    compteur++;
+    elements.style.transform = "translateX(-100%)"
+}
+
+function slideNext2(){
+    // on incrémente le compteur
+    compteur++;
+    elements.style.transform = "translateX(0%)"
+}
