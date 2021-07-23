@@ -61,7 +61,7 @@
 //     }
 // })
 
-// affichage mulitples
+
 // let cal = 1;
 // if (calc != 0) {
 //     for (let compteur = 1;
@@ -80,18 +80,35 @@
 //     }
 // }
 
-let valid = document.querySelector("button");
-let result = document.querySelector("div")
+// Bonne facon d'afficher les multiples
+// let valid = document.querySelector("button");
+// let result = document.querySelector("div")
 
-valid.addEventListener("click", function () {
-    let nombre = Number(valid.previousElementSibling.value)
-    result.textContent = "";
-    if (nombre != 0) {
-        for (let compteur = 1;
-            (compteur * nombre) <= 1000; compteur += 1) {
-            let baliseP = document.createElement("p")
-            baliseP.textContent = compteur * nombre;
-            result.appendChild(baliseP)
-        }
-    }
-});
+// valid.addEventListener("click", function () {
+//     let nombre = Number(valid.previousElementSibling.value)
+//     result.textContent = "";
+//     if (nombre != 0) {
+//         for (let compteur = 1;
+//             (compteur * nombre) <= 1000; compteur += 1) {
+//             let baliseP = document.createElement("p")
+//             baliseP.textContent = compteur * nombre;
+//             result.appendChild(baliseP)
+//         }
+//     }
+// });
+
+// DIAPORAMA
+// variable globales
+// compteur qui permet de savoir sur quelle image nous sommes
+let compteur = 0;
+// 
+let timer, elements, slides;
+
+window.onload = () => {
+    //  recuperer le diapo
+    const diapo = document.querySelector(".diapo");
+
+    elements = document.querySelector(".elements");
+
+}
+// 17min22

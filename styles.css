@@ -1,0 +1,30 @@
+main{
+    width: 80%;
+    margin: auto;
+}
+.diapo{
+    position: relative;
+}
+.elements{
+    
+    display: flex;
+}
+.element{
+    flex: 1 0 100%;
+    position: relative;
+}
+.element > img{
+    width: 100%;
+}
+#nav-gauche, #nav-droite{
+    position: absolute;
+    top: 50%;
+    transform: translate(-10%);
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+
+}
+#nav-droite{
+    right: 0;
+}
