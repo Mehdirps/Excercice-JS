@@ -110,30 +110,61 @@ window.onload = () => {
 
     elements = document.querySelector(".elements");
 
+    // on clone la premiere image
+    let firstimage = elements.firstElementChild.cloneNode(true);
+
+    // on injecte le clone a la fin du diapo
+    elements.appendChild(firstimage);
+
+
     slides = Array.from(elements.children)
-    
+
     // on récupère la largeur d'une slide
     slideWidth = diapo.getBoundingClientRect().width;
     // on récupère les flèches
     let next = document.querySelector("#nav-droite");
-    let next2 = document.querySelector("#nav-gauche")
+    let prev = document.querySelector("#nav-gauche");
 
     // on gère le click
     next.addEventListener("click", slideNext)
-    next2.addEventListener("click",slideNext2)
+    prev.addEventListener("click", slidePrev)
 }
 
 /**
  * Faire défiler le diapo vers la droite
  */
-function slideNext(){
+function slideNext() {
     // on incrémente le compteur
     compteur++;
-    elements.style.transform = "translateX(-100%)"
+    elements.style.transition = "1s linear";
+
+    let decal = -slideWidth * compteur;
+    elements.style.transform = `translateX(${decal}px)`;
+
+    // on attend la fin de la transition et on rembobine de facon caché
+    setTimeout(function(){
+        if(compteur >= slides.length - 1){
+            compteur = 0;
+            elements.style.transition = "unset";
+            elements.style.transform = "translateX(0)";
+        }
+    }, 1000)
 }
 
-function slideNext2(){
-    // on incrémente le compteur
-    compteur++;
-    elements.style.transform = "translateX(0%)"
+/**
+ * Cette fonction fait défiler vers la gauche
+ */
+function slidePrev() {
+    // On décremente le compteur
+    compteur--;
+    elements.style.transform = "1s linear";
+
+    if(compteur < 0){
+        compteur = slides.length - 1;
+        let decal = -slideWidth * compteur;
+        elements.style.transition = "unset";
+        elements.style.transform = `translateX(${decal}px)`;
+        
+    }
 }
+// 36min
