@@ -102,11 +102,13 @@
 // compteur qui permet de savoir sur quelle image nous sommes
 let compteur = 0;
 // 
-let timer, elements, slides;
+let timer, elements, slides, slideWidth, speed;
 
 window.onload = () => {
     //  recuperer le diapo
     const diapo = document.querySelector(".diapo");
+    // on récupère le data-speed
+    speed = diapo.dataset.speed
 
     elements = document.querySelector(".elements");
 
@@ -128,6 +130,9 @@ window.onload = () => {
     // on gère le click
     next.addEventListener("click", slideNext)
     prev.addEventListener("click", slidePrev)
+
+    // on automatise le défilement
+    timer = setInterval(slideNext, speed);
 }
 
 /**
@@ -142,8 +147,8 @@ function slideNext() {
     elements.style.transform = `translateX(${decal}px)`;
 
     // on attend la fin de la transition et on rembobine de facon caché
-    setTimeout(function(){
-        if(compteur >= slides.length - 1){
+    setTimeout(function () {
+        if (compteur >= slides.length - 1) {
             compteur = 0;
             elements.style.transition = "unset";
             elements.style.transform = "translateX(0)";
@@ -159,12 +164,15 @@ function slidePrev() {
     compteur--;
     elements.style.transform = "1s linear";
 
-    if(compteur < 0){
+    if (compteur < 0) {
         compteur = slides.length - 1;
         let decal = -slideWidth * compteur;
         elements.style.transition = "unset";
         elements.style.transform = `translateX(${decal}px)`;
-        
+        slidePrev(slidePrev, 1);
+
     }
+
+    let decal = -slideWidth * compteur;
+    elements.style.transform = `translateX(${decal}px)`;
 }
-// 36min
