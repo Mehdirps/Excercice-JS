@@ -1,4 +1,5 @@
-main{
+/* CSS DIAPO */
+/* main{
     width: 80%;
     margin: auto;
 }
@@ -28,4 +29,12 @@ main{
 }
 #nav-droite{
     right: 0;
+} */
+/* FIN CSS DIAPO */
+
+/* mini bout de css pour le bouton memoire */
+#memoire{
+    top: 5px;
+    left: 150px;
+    display: none;
 }

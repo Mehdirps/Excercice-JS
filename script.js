@@ -80,7 +80,7 @@
 //     }
 // }
 
-// Bonne facon d'afficher les multiples
+// // Bonne facon d'afficher les multiples
 // let valid = document.querySelector("button");
 // let result = document.querySelector("div")
 
@@ -179,24 +179,54 @@
 
 // Verification longueur de mdp
 
-let form = document.querySelector("form")
-let motdepasse = document.querySelector("input");
-let barre = document.querySelector("p");
-motdepasse.length = 0;
+// let form = document.querySelector("form")
+// let motdepasse = document.querySelector("input");
+// let barre = document.querySelector("p");
+// motdepasse.length = 0;
 
-motdepasse.addEventListener("input", function () {
+// motdepasse.addEventListener("input", function () {
     
-    if (motdepasse.value.length < 5) {
-        barre.textContent = "Mot de passe faible";
-        barre.style.color = "red";
-    } else if (motdepasse.value.length < 10) {
-        barre.textContent = "Mot de passe moyen";
-        barre.style.color = "orange";
+//     if (motdepasse.value.length < 10) {
+//         barre.textContent = "Mot de passe faible";
+//         barre.style.color = "red";
+//     } else if (motdepasse.value.length < 15) {
+//         barre.textContent = "Mot de passe moyen";
+//         barre.style.color = "orange";
 
 
-    } else if (motdepasse.value.length < 15) {
-        barre.textContent = "Mot de passe fort";
-        barre.style.color = "green";
+//     } else if (motdepasse.value.length < 20) {
+//         barre.textContent = "Mot de passe fort";
+//         barre.style.color = "green";
+//     }
+
+// })
+
+// CALCULATRICE
+
+// *************Variables globales******************//
+// Eléments mémoires et écran
+const memoireElt = document.querySelector("#memoire");
+const ecranElt = document.querySelector("#ecran");
+
+// On stocke la valeur de l'écran précédent
+let precedent = 0;
+
+// On stocke l'affichage
+let affichage = "";
+
+// On stocke l'opération
+let operation = null;
+
+// On initialise la mémoire
+let memoire;
+
+window.onload = () => {
+    // On écoute les click sur les touches
+    let touches = document.querySelector("span");
+
+    for(let touche of touches){
+        touche.addEventListener("click",gererTouches);
     }
+}
 
-})
+// 19min/
