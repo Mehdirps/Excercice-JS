@@ -97,82 +97,106 @@
 //     }
 // });
 
-// DIAPORAMA
-// variable globales
-// compteur qui permet de savoir sur quelle image nous sommes
-let compteur = 0;
-// 
-let timer, elements, slides, slideWidth, speed;
+// // DIAPORAMA
+// // variable globales
+// // compteur qui permet de savoir sur quelle image nous sommes
+// let compteur = 0;
+// // 
+// let timer, elements, slides, slideWidth, speed;
 
-window.onload = () => {
-    //  recuperer le diapo
-    const diapo = document.querySelector(".diapo");
-    // on récupère le data-speed
-    speed = diapo.dataset.speed
+// window.onload = () => {
+//     //  recuperer le diapo
+//     const diapo = document.querySelector(".diapo");
+//     // on récupère le data-speed
+//     speed = diapo.dataset.speed
 
-    elements = document.querySelector(".elements");
+//     elements = document.querySelector(".elements");
 
-    // on clone la premiere image
-    let firstimage = elements.firstElementChild.cloneNode(true);
+//     // on clone la premiere image
+//     let firstimage = elements.firstElementChild.cloneNode(true);
 
-    // on injecte le clone a la fin du diapo
-    elements.appendChild(firstimage);
+//     // on injecte le clone a la fin du diapo
+//     elements.appendChild(firstimage);
 
 
-    slides = Array.from(elements.children)
+//     slides = Array.from(elements.children)
 
-    // on récupère la largeur d'une slide
-    slideWidth = diapo.getBoundingClientRect().width;
-    // on récupère les flèches
-    let next = document.querySelector("#nav-droite");
-    let prev = document.querySelector("#nav-gauche");
+//     // on récupère la largeur d'une slide
+//     slideWidth = diapo.getBoundingClientRect().width;
+//     // on récupère les flèches
+//     let next = document.querySelector("#nav-droite");
+//     let prev = document.querySelector("#nav-gauche");
 
-    // on gère le click
-    next.addEventListener("click", slideNext)
-    prev.addEventListener("click", slidePrev)
+//     // on gère le click
+//     next.addEventListener("click", slideNext)
+//     prev.addEventListener("click", slidePrev)
 
-    // on automatise le défilement
-    timer = setInterval(slideNext, speed);
-}
+//     // on automatise le défilement
+//     timer = setInterval(slideNext, speed);
+// }
 
-/**
- * Faire défiler le diapo vers la droite
- */
-function slideNext() {
-    // on incrémente le compteur
-    compteur++;
-    elements.style.transition = "1s linear";
+// /**
+//  * Faire défiler le diapo vers la droite
+//  */
+// function slideNext() {
+//     // on incrémente le compteur
+//     compteur++;
+//     elements.style.transition = "1s linear";
 
-    let decal = -slideWidth * compteur;
-    elements.style.transform = `translateX(${decal}px)`;
+//     let decal = -slideWidth * compteur;
+//     elements.style.transform = `translateX(${decal}px)`;
 
-    // on attend la fin de la transition et on rembobine de facon caché
-    setTimeout(function () {
-        if (compteur >= slides.length - 1) {
-            compteur = 0;
-            elements.style.transition = "unset";
-            elements.style.transform = "translateX(0)";
-        }
-    }, 1000)
-}
+//     // on attend la fin de la transition et on rembobine de facon caché
+//     setTimeout(function () {
+//         if (compteur >= slides.length - 1) {
+//             compteur = 0;
+//             elements.style.transition = "unset";
+//             elements.style.transform = "translateX(0)";
+//         }
+//     }, 1000)
+// }
 
-/**
- * Cette fonction fait défiler vers la gauche
- */
-function slidePrev() {
-    // On décremente le compteur
-    compteur--;
-    elements.style.transform = "1s linear";
+// /**
+//  * Cette fonction fait défiler vers la gauche
+//  */
+// function slidePrev() {
+//     // On décremente le compteur
+//     compteur--;
+//     elements.style.transform = "1s linear";
 
-    if (compteur < 0) {
-        compteur = slides.length - 1;
-        let decal = -slideWidth * compteur;
-        elements.style.transition = "unset";
-        elements.style.transform = `translateX(${decal}px)`;
-        slidePrev(slidePrev, 1);
+//     if (compteur < 0) {
+//         compteur = slides.length - 1;
+//         let decal = -slideWidth * compteur;
+//         elements.style.transition = "unset";
+//         elements.style.transform = `translateX(${decal}px)`;
+//         slidePrev(slidePrev, 1);
 
+//     }
+
+//     let decal = -slideWidth * compteur;
+//     elements.style.transform = `translateX(${decal}px)`;
+// }
+
+// Verification longueur de mdp
+
+let form = document.querySelector("form")
+let motdepasse = document.querySelector("input");
+let barre = document.querySelector("p");
+motdepasse.length = 0;
+
+motdepasse.addEventListener("input", function () {
+    
+    if (motdepasse.value.length < 5) {
+        barre.textContent = "Mot de passe faible";
+        barre.style.color = "red";
+    } else if (motdepasse.value.length < 10) {
+        barre.textContent = "Mot de passe moyen";
+        barre.style.color = "orange";
+
+
+    } else if (motdepasse.value.length < 15) {
+        barre.textContent = "Mot de passe fort";
+        barre.style.color = "green";
     }
 
-    let decal = -slideWidth * compteur;
-    elements.style.transform = `translateX(${decal}px)`;
-}
+})
