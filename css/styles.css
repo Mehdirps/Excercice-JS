@@ -33,30 +33,62 @@
 /* FIN CSS DIAPO */
 
 /* mini bout de css pour le bouton memoire */
-#memoire{
+/* #memoire{
     top: 17px;
     left: 150px;
     display: none;
-}
+} */
 
 /* CSS CALCULATRICE */
 body{
     margin: 0;
 }
-.calculatrice{
-    border: solid black;
+#memoire{
     position: absolute;
+    top: 30px;
+    left: 30%;
+}
+.calculatrice{
+    margin: 10px;
+    border: solid black;
+    border-radius: 20%;
+    overflow: hidden;
+    background-image: url(../img/math.jpg);
+    background-size: 100%;
+}
+.affichage{
+    position: absolute;
+
+}
+#ecran{
+    display: block;
+    border: solid;
+    width: 50%;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;  
+    margin-left: 25%; 
+    background-color: rgb(235, 235, 235);
 }
 .bouton{
     display: grid;
-    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-columns: 60px 60px 60px 60px;
     grid-template-rows: 50px 50px 50px 50px 50px;
-    padding: 10px;
+    gap: 10px;
+    margin-left: 30px;
+    margin-right: 25px;
+    margin-bottom: 20px;
+    
 }
 .boitebtn{
     text-align: center;
     display: block;
     border-style: solid;
+    border-radius: 50%;
     border-width: 1px;
-    padding: 5px;
+    padding: 2px;
+}
+.btn{
+    font-size: 1.1rem;
+    font-weight: bold;
 }
