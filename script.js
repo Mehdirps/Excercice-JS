@@ -257,7 +257,7 @@ function gererTouches() {
                 // calcules
             case "+":
             case "-":
-            case "*":
+            case "x":
             case "/":
                 // On calcule la valeur resultat de l'etape précédente
                 precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
@@ -280,7 +280,7 @@ function gererTouches() {
                 break;
                 // On gère la mémoire
             case "M+":
-                // on stock en additionnant à la valeur déjà en mémoire
+                // On stock en additionnant à la valeur déjà en mémoire
                 localStorage.memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) + parseFloat(affichage) : parseFloat(affichage);
                 // affiché le M
                 memoireElt.style.display = "initial";
@@ -314,7 +314,7 @@ function calculer(nb1, nb2, operation) {
     nb2 = parseFloat(nb2);
     if (operation === "+") return nb1 + nb2;
     if (operation === "-") return nb1 - nb2;
-    if (operation === "*") return nb1 * nb2;
+    if (operation === "x") return nb1 * nb2;
     if (operation === "/") return nb1 / nb2;
 }
 

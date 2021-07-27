@@ -38,3 +38,25 @@
     left: 150px;
     display: none;
 }
+
+/* CSS CALCULATRICE */
+body{
+    margin: 0;
+}
+.calculatrice{
+    border: solid black;
+    position: absolute;
+}
+.bouton{
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 50px 50px 50px 50px 50px;
+    padding: 10px;
+}
+.boitebtn{
+    text-align: center;
+    display: block;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+}
