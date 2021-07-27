@@ -185,16 +185,16 @@
 // motdepasse.length = 0;
 
 // motdepasse.addEventListener("input", function () {
-    
-//     if (motdepasse.value.length < 10) {
+
+//     if (motdepasse.value.length < 5) {
 //         barre.textContent = "Mot de passe faible";
 //         barre.style.color = "red";
-//     } else if (motdepasse.value.length < 15) {
+//     } else if (motdepasse.value.length < 10) {
 //         barre.textContent = "Mot de passe moyen";
 //         barre.style.color = "orange";
 
 
-//     } else if (motdepasse.value.length < 20) {
+//     } else if (motdepasse.value.length > 10) {
 //         barre.textContent = "Mot de passe fort";
 //         barre.style.color = "green";
 //     }
@@ -222,11 +222,100 @@ let memoire;
 
 window.onload = () => {
     // On écoute les click sur les touches
-    let touches = document.querySelector("span");
+    let touches = document.querySelectorAll("span");
 
-    for(let touche of touches){
-        touche.addEventListener("click",gererTouches);
+    for (let touche of touches) {
+        touche.addEventListener("click", gererTouches);
+    }
+    // Récupérer de la mémoire depuis le stockage local
+    memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) : 0;
+    if (memoire != 0) memoireElt.style.display = "initial";
+
+
+}
+
+// cette fonction réagit au click sur les touches
+function gererTouches() {
+    let touche = this.innerText;
+    /**
+     * A vérifier, pas plusieurs point dans l'affichage
+     */
+    // On vérifie si c'est un chiffre ou .
+    if (parseFloat(touche) >= 0 || touche === ".") {
+        // On met à jour la valeur d'affichage et on l'affiche sur l'écran
+        affichage = (affichage === "") ? touche.toString() : affichage + touche.toString();
+        ecranElt.innerText = affichage;
+    } else {
+        switch (touche) {
+            // Touche C réinitialise tout
+            case "C":
+                precedent = 0;
+                affichage = "";
+                operation = null
+                ecranElt.innerText = 0;
+                break;
+                // calcules
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                // On calcule la valeur resultat de l'etape précédente
+                precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
+                // On met à jour l'écran
+                ecranElt.innerText = precedent;
+                // On stock l'opération
+                operation = touche;
+                // On réinitialise la variable d'affichage
+                affichage = "";
+                break;
+            case "=":
+                // On calcule la valeur resultat de l'etape précédente
+                precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
+                // On met à jour l'écran
+                ecranElt.innerText = precedent;
+                // On stock le resutlat dans  d'affichage
+                affichage = precedent;
+                // On réinitialise précédent
+                precedent = 0;
+                break;
+                // On gère la mémoire
+            case "M+":
+                // on stock en additionnant à la valeur déjà en mémoire
+                localStorage.memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) + parseFloat(affichage) : parseFloat(affichage);
+                // affiché le M
+                memoireElt.style.display = "initial";
+                break;
+            case "MC":
+                // On efface la mémoire
+                localStorage.memoire = 0;
+                // On efface le M
+                memoireElt.style.display = "none";
+                break;
+            case "MR":
+                //  On récupere la valeur stocker
+                memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) : 0;
+                affichage = memoire;
+                ecranElt.innerText = memoire;
+                break;
+            
+        }
     }
 }
 
-// 19min/
+/**
+ * Affectue le calcul
+ * @param {number} nb1 
+ * @param {number} nb2 
+ * @param {string} operation
+ * @returns number
+ */
+function calculer(nb1, nb2, operation) {
+    nb1 = parseFloat(nb1);
+    nb2 = parseFloat(nb2);
+    if (operation === "+") return nb1 + nb2;
+    if (operation === "-") return nb1 - nb2;
+    if (operation === "*") return nb1 * nb2;
+    if (operation === "/") return nb1 / nb2;
+}
+
+// 57.40
