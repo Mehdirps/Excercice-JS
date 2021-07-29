@@ -48,10 +48,10 @@ body{
     top: 30px;
     left: 30%;
 }
-.calculatrice{
+#calculatrice{
     margin: 10px;
     border: solid black;
-    border-radius: 20%;
+    border-radius: 10%;
     overflow: hidden;
     background-image: url(../img/math.jpg);
     background-size: 100%;
@@ -82,13 +82,49 @@ body{
 }
 .boitebtn{
     text-align: center;
-    display: block;
     border-style: solid;
     border-radius: 50%;
     border-width: 1px;
     padding: 2px;
 }
+.boitebtn:hover{
+    transform: scale(0.9);
+}
 .btn{
     font-size: 1.1rem;
     font-weight: bold;
+   
+}
+/* @keyframes spin{
+    100%{
+        transform: rotateX(360deg);
+    }
+} */
+@media screen and (min-width:767px) {
+    .calculatrice{
+        width: 45%;
+    }
+    #memoire{
+        left: 110px;
+    }
+}
+@media screen and (min-width:1360px) {
+    .calculatrice{
+        width: 25%;
+
+    }
+    #memoire{
+        left: 110px;
+    }
+}
+@media screen and (min-width:1550px) {
+    .calculatrice{
+        width: 20%;
+    }
+    #memoire{
+        left: 120px;
+    }
+    .bouton{
+        margin-left: 50px;
+    }
 }

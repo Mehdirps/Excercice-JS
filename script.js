@@ -205,117 +205,140 @@
 
 // *************Variables globales******************//
 // Eléments mémoires et écran
-const memoireElt = document.querySelector("#memoire");
-const ecranElt = document.querySelector("#ecran");
+// const memoireElt = document.querySelector("#memoire");
+// const ecranElt = document.querySelector("#ecran");
 
-// On stocke la valeur de l'écran précédent
-let precedent = 0;
+// // On stocke la valeur de l'écran précédent
+// let precedent = 0;
 
-// On stocke l'affichage
-let affichage = "";
+// // On stocke l'affichage
+// let affichage = "";
 
-// On stocke l'opération
-let operation = null;
+// // On stocke l'opération
+// let operation = null;
 
-// On initialise la mémoire
-let memoire;
+// // On initialise la mémoire
+// let memoire;
 
-window.onload = () => {
-    // On écoute les click sur les touches
-    let touches = document.querySelectorAll("span");
+// window.onload = () => {
+//     // On écoute les click sur les touches
+//     let touches = document.querySelectorAll("span");
 
-    for (let touche of touches) {
-        touche.addEventListener("click", gererTouches);
-    }
-    // Récupérer de la mémoire depuis le stockage local
-    memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) : 0;
-    if (memoire != 0) memoireElt.style.display = "initial";
+//     for (let touche of touches) {
+//         touche.addEventListener("click", gererTouches);
+//     }
+//     // Récupérer de la mémoire depuis le stockage local
+//     memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) : 0;
+//     if (memoire != 0) memoireElt.style.display = "initial";
 
 
+// }
+
+// // cette fonction réagit au click sur les touches
+// function gererTouches() {
+//     let touche = this.innerText;
+//     /**
+//      * A vérifier, pas plusieurs point dans l'affichage
+//      */
+//     // On vérifie si c'est un chiffre ou .
+//     if (parseFloat(touche) >= 0 || touche === ".") {
+//         // On met à jour la valeur d'affichage et on l'affiche sur l'écran
+//         affichage = (affichage === "") ? touche.toString() : affichage + touche.toString();
+//         ecranElt.innerText = affichage;
+//     } else {
+//         switch (touche) {
+//             // Touche C réinitialise tout
+//             case "C":
+//                 precedent = 0;
+//                 affichage = "";
+//                 operation = null
+//                 ecranElt.innerText = 0;
+//                 break;
+//                 // calcules
+//             case "+":
+//             case "-":
+//             case "x":
+//             case "/":
+//                 // On calcule la valeur resultat de l'etape précédente
+//                 precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
+//                 // On met à jour l'écran
+//                 ecranElt.innerText = precedent;
+//                 // On stock l'opération
+//                 operation = touche;
+//                 // On réinitialise la variable d'affichage
+//                 affichage = "";
+//                 break;
+//             case "=":
+//                 // On calcule la valeur resultat de l'etape précédente
+//                 precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
+//                 // On met à jour l'écran
+//                 ecranElt.innerText = precedent;
+//                 // On stock le resutlat dans  d'affichage
+//                 affichage = precedent;
+//                 // On réinitialise précédent
+//                 precedent = 0;
+//                 break;
+//                 // On gère la mémoire
+//             case "M+":
+//                 // On stock en additionnant à la valeur déjà en mémoire
+//                 localStorage.memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) + parseFloat(affichage) : parseFloat(affichage);
+//                 // affiché le M
+//                 memoireElt.style.display = "initial";
+//                 break;
+//             case "MC":
+//                 // On efface la mémoire
+//                 localStorage.memoire = 0;
+//                 // On efface le M
+//                 memoireElt.style.display = "none";
+//                 break;
+//             case "MR":
+//                 //  On récupere la valeur stocker
+//                 memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) : 0;
+//                 affichage = memoire;
+//                 ecranElt.innerText = memoire;
+//                 break;
+
+//         }
+//     }
+// }
+
+// /**
+//  * Affectue le calcul
+//  * @param {number} nb1 
+//  * @param {number} nb2 
+//  * @param {string} operation
+//  * @returns number
+//  */
+// function calculer(nb1, nb2, operation) {
+//     nb1 = parseFloat(nb1);
+//     nb2 = parseFloat(nb2);
+//     if (operation === "+") return nb1 + nb2;
+//     if (operation === "-") return nb1 - nb2;
+//     if (operation === "x") return nb1 * nb2;
+//     if (operation === "/") return nb1 / nb2;
+// }
+
+// // 57.40
+
+// Compte à rebours avec Noêl
+
+let rebour = document.querySelector("h2");
+// console.log(noel, maintenant);
+
+function getChrono() {
+    let maintenant = new Date();
+    let noel = new Date(2021, 11, 25);
+    let compteur = noel - maintenant;
+    let jours = Math.floor(compteur / (1000 * 60 * 60 * 24));
+    let heures = Math.floor((compteur % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    let minutes = Math.floor((compteur % (1000 * 60 * 60)) / (1000 * 60));
+    let secondes = Math.floor((compteur % (1000 * 60) / 1000))
+    // console.log(jours, heures, minutes, secondes)
+    rebour.innerText = `Il reste ${jours}j ${heures}h ${minutes}m ${secondes}s avant Noêl`;
+    console.log(rebour.innerText)
+    
 }
 
-// cette fonction réagit au click sur les touches
-function gererTouches() {
-    let touche = this.innerText;
-    /**
-     * A vérifier, pas plusieurs point dans l'affichage
-     */
-    // On vérifie si c'est un chiffre ou .
-    if (parseFloat(touche) >= 0 || touche === ".") {
-        // On met à jour la valeur d'affichage et on l'affiche sur l'écran
-        affichage = (affichage === "") ? touche.toString() : affichage + touche.toString();
-        ecranElt.innerText = affichage;
-    } else {
-        switch (touche) {
-            // Touche C réinitialise tout
-            case "C":
-                precedent = 0;
-                affichage = "";
-                operation = null
-                ecranElt.innerText = 0;
-                break;
-                // calcules
-            case "+":
-            case "-":
-            case "x":
-            case "/":
-                // On calcule la valeur resultat de l'etape précédente
-                precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
-                // On met à jour l'écran
-                ecranElt.innerText = precedent;
-                // On stock l'opération
-                operation = touche;
-                // On réinitialise la variable d'affichage
-                affichage = "";
-                break;
-            case "=":
-                // On calcule la valeur resultat de l'etape précédente
-                precedent = (precedent === 0) ? parseFloat(affichage) : calculer(precedent, parseFloat(affichage), operation);
-                // On met à jour l'écran
-                ecranElt.innerText = precedent;
-                // On stock le resutlat dans  d'affichage
-                affichage = precedent;
-                // On réinitialise précédent
-                precedent = 0;
-                break;
-                // On gère la mémoire
-            case "M+":
-                // On stock en additionnant à la valeur déjà en mémoire
-                localStorage.memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) + parseFloat(affichage) : parseFloat(affichage);
-                // affiché le M
-                memoireElt.style.display = "initial";
-                break;
-            case "MC":
-                // On efface la mémoire
-                localStorage.memoire = 0;
-                // On efface le M
-                memoireElt.style.display = "none";
-                break;
-            case "MR":
-                //  On récupere la valeur stocker
-                memoire = (localStorage.memoire) ? parseFloat(localStorage.memoire) : 0;
-                affichage = memoire;
-                ecranElt.innerText = memoire;
-                break;
-            
-        }
-    }
-}
-
-/**
- * Affectue le calcul
- * @param {number} nb1 
- * @param {number} nb2 
- * @param {string} operation
- * @returns number
- */
-function calculer(nb1, nb2, operation) {
-    nb1 = parseFloat(nb1);
-    nb2 = parseFloat(nb2);
-    if (operation === "+") return nb1 + nb2;
-    if (operation === "-") return nb1 - nb2;
-    if (operation === "x") return nb1 * nb2;
-    if (operation === "/") return nb1 / nb2;
-}
-
-// 57.40
+let compteurdown = setInterval(() => {
+    getChrono()
+}, 1000);
